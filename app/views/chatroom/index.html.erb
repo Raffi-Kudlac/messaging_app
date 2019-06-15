@@ -1,1 +1,9 @@
-<h1>The Index page of the  chatroom</h1>
+<%= render 'layouts/header_icon', {text: "Best Caht App"} %>
+<div class="ui two column grid">
+  <div class="twelve wide column">
+    <%= render 'chatroom/chatarea' %>
+  </div>
+  <div class="four wide column">
+    <%= render 'chatroom/menu' %>
+  </div>
+</div>
