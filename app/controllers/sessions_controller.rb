@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+
+  before_action(:logged_in_redirect, only: [:new, :create])
+
   def new
   end
 
@@ -9,7 +12,7 @@ class SessionsController < ApplicationController
       flash[:success] = "You have successfuly loged in"
       redirect_to root_path
     else
-      flash.now[:danger] = "The login was not successful"
+      flash.now[:error] = "The login was not successful"
       render 'new'
     end
   end
@@ -20,6 +23,13 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def logged_in_redirect
+    if logged_in?
+      flash[:error] = "You are already logged in"
+      redirect_to root_path
+    end
+  end
 
   def session_params
     params.require(:session).permit(:username, :password)

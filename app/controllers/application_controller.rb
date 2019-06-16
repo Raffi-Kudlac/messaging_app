@@ -20,4 +20,11 @@ class ApplicationController < ActionController::Base
     @current_user = nil
     flash[:success] = "You have logged out"
   end
+
+  def require_user
+    if (!logged_in?)
+      flash[:error] = "You need to be logged in to perform that action"
+      redirect_to login_path
+    end
+  end
 end
